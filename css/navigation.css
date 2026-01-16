@@ -1,0 +1,81 @@
+/* --- Premium Navigation Styles --- */
+
+.nav-card {
+    grid-row: 2 / 3;
+    grid-column: 2 / 3;
+    background: linear-gradient(165deg, #0c0c12 0%, #050508 100%);
+    padding: 0 2.5rem;
+    align-items: center;
+    justify-content: center;
+}
+
+.dock-nav {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    gap: 1rem;
+}
+
+.nav-link {
+    color: var(--text-secondary);
+    text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
+    border-radius: 16px;
+    transition: var(--transition-smooth);
+    font-size: 0.85rem;
+    font-weight: 500;
+    position: relative;
+    overflow: hidden;
+}
+
+/* Hover glow background */
+.nav-link::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--accent-gradient);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    border-radius: 16px;
+}
+
+.nav-link i {
+    font-size: 1.3rem;
+    position: relative;
+    z-index: 1;
+    transition: var(--transition-smooth);
+}
+
+.nav-link span {
+    position: relative;
+    z-index: 1;
+    letter-spacing: 0.5px;
+}
+
+.nav-link:hover {
+    color: #fff;
+    transform: translateY(-4px);
+}
+
+.nav-link:hover::before {
+    opacity: 0.12;
+}
+
+.nav-link:hover i {
+    color: var(--accent-cyan);
+    text-shadow: 0 0 15px rgba(0, 212, 255, 0.7);
+    transform: scale(1.15);
+}
+
+/* Active state */
+.nav-link.active {
+    color: var(--accent-cyan);
+}
+
+.nav-link.active::before {
+    opacity: 0.1;
+}

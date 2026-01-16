@@ -8,36 +8,61 @@
     <!-- Modular CSS -->
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/layout.css">
-    <link rel="stylesheet" href="css/components.css">
+    <link rel="stylesheet" href="css/cards.css">
+    <link rel="stylesheet" href="css/profile.css">
+    <link rel="stylesheet" href="css/stats.css">
+    <link rel="stylesheet" href="css/navigation.css">
+    <link rel="stylesheet" href="css/player.css">
+    <link rel="stylesheet" href="css/hero.css">
 
     <!-- Font Awesome for Icons (Updated to 6.5.1 for X-Twitter support) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=JetBrains+Mono:wght@400;700&family=Outfit:wght@300;400;700&display=swap"
+        rel="stylesheet">
 </head>
 
 <body>
+    <!-- Global Noise Overlay -->
+    <div class="noise-overlay"></div>
 
-    <!-- Background Video Container -->
-    <div class="video-background">
-        <video id="bg-video" autoplay muted loop playsinline>
-            <!-- Source will be set by JS -->
-        </video>
-        <div class="video-overlay"></div>
-    </div>
+    <!-- Custom Cursor -->
+    <div class="cursor-spotlight" id="cursor-spotlight"></div>
+    <div class="cursor-dot" id="cursor-dot"></div>
 
-    <!-- Entrance Overlay -->
-    <div id="enter-overlay" class="enter-overlay">
-        <div class="enter-content">
-            <p>Click anywhere to enter</p>
+    <!-- Hero Section ("The Flare") -->
+    <section class="hero-section">
+        <div class="hero-bg-graph"></div>
+
+        <!-- Floating Tech Stack Cards -->
+        <div class="tech-orbit">
+            <div class="tech-card"><i class="fab fa-react"></i> React</div>
+            <div class="tech-card"><i class="fab fa-vuejs"></i> Vue.js</div>
+            <div class="tech-card"><i class="fab fa-js"></i> TypeScript</div>
+            <div class="tech-card"><i class="fab fa-node"></i> Node.js</div>
         </div>
-    </div>
 
-    <!-- Main Content (Hidden initially) -->
-    <main id="main-content" class="bento-container hidden">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                Code in Silence,
+                <span class="highlight">Shine like a Flare.</span>
+            </h1>
+            <p class="hero-subtitle">[ DIGITAL YOUTH & SILENT ENERGY ]</p>
+        </div>
 
-        <!-- Grid Item 1: Profile (Left) -->
-        <div class="bento-item profile-card">
+        <div class="scroll-indicator">
+            SCROLL TO EXPLORE <br> <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Main Content (Bento Grid) -->
+    <main id="main-content" class="bento-container visible">
+
+        <!-- Grid Item 1: Profile (Spans 2 rows) -->
+        <div class="bento-item profile-card row-span-2">
             <div class="avatar-container">
                 <img src="assets/images/avatar_placeholder.png" alt="Avatar" id="avatar"
                     onerror="this.src='https://ui-avatars.com/api/?name=SF&background=111&color=fff&size=200&font-size=0.4'">
@@ -56,36 +81,64 @@
             </div>
         </div>
 
-        <!-- Grid Item 2: GitHub Stats (Right) -->
-        <div class="bento-item stats-card">
+        <!-- Grid Item 2: Terminal ("Hello World") -->
+        <div class="bento-item terminal-card col-span-2">
+            <div class="terminal-header">
+                <div class="terminal-dot red"></div>
+                <div class="terminal-dot yellow"></div>
+                <div class="terminal-dot green"></div>
+            </div>
+            <div class="terminal-body">
+                <p class="typing-effect">> console.log("Hello World");</p>
+                <p style="opacity:0.8; margin-top:10px;">// Welcome to my digital workspace.</p>
+                <p style="opacity:0.8;">// Feel free to look around.</p>
+            </div>
+        </div>
+
+        <!-- Grid Item 3: Project 1 (Image) -->
+        <div class="bento-item project-card">
+            <img src="https://images.unsplash.com/photo-1555099962-4199c345e5dd?q=80&w=1000&auto=format&fit=crop"
+                alt="Project 1" class="project-image">
+            <div class="project-content">
+                <h3 class="item-title">EconMind</h3>
+                <div class="item-tags">
+                    <span>AI</span>
+                    <span>•</span>
+                    <span>Python</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grid Item 4: GitHub Stats -->
+        <div class="bento-item stats-card" style="min-height: 200px;">
             <div class="stats-header">
                 <div class="stats-title-group">
-                    <h2>Contribution Activity</h2>
-                    <p class="stats-desc">Real-time GitHub pulse</p>
+                    <h2>Activity</h2>
                 </div>
                 <span class="live-indicator"><span class="dot"></span> Live</span>
             </div>
-
-            <div class="stats-grid">
-                <div class="stats-info">
-                    <div class="stat-item">
-                        <span class="stat-label">Total Contributions</span>
-                        <span class="stat-value">96</span>
-                    </div>
-
-                </div>
-                <div class="graph-container">
-                    <img src="https://github-contributions-api.deno.dev/silentflarecom.svg" alt="Github Chart"
-                        id="github-chart">
-                </div>
+            <div class="graph-container">
+                <img src="https://github-contributions-api.deno.dev/silentflarecom.svg" alt="Github Chart"
+                    id="github-chart">
             </div>
-
-            <!-- Decorative scanline effect -->
-            <div class="scanline"></div>
         </div>
 
-        <!-- Grid Item 3: Navigation (Bottom) -->
-        <div class="bento-item nav-card">
+        <!-- Grid Item 5: Project 2 -->
+        <div class="bento-item project-card">
+            <img src="https://images.unsplash.com/photo-1518770660439-4636190af475?q=80&w=1000&auto=format&fit=crop"
+                alt="Project 2" class="project-image">
+            <div class="project-content">
+                <h3 class="item-title">NeuralNet</h3>
+                <div class="item-tags">
+                    <span>ML</span>
+                    <span>•</span>
+                    <span>TensorFlow</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grid Item 6: Navigation -->
+        <div class="bento-item nav-card col-span-2">
             <nav class="dock-nav">
                 <a href="#" class="nav-link"><i class="fas fa-pen-nib"></i> <span>Blog</span></a>
                 <a href="#" class="nav-link"><i class="fas fa-code"></i> <span>Projects</span></a>
@@ -109,7 +162,14 @@
         </audio>
     </div>
 
+    <!-- Footer -->
+    <footer
+        style="text-align: center; padding: 2rem; color: var(--text-muted); font-family: var(--font-mono); font-size: 0.9rem;">
+        <p>Built with 🩵 by SilentFlare</p>
+    </footer>
+
     <!-- Modular Scripts -->
+    <script src="js/cursor.js"></script>
     <script src="js/video.js"></script>
     <script src="js/audio.js"></script>
     <script src="js/script.js"></script>

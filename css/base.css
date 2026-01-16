@@ -1,32 +1,150 @@
-/* Global Reset & Variables */
+/* Global Reset & Premium Design Variables */
 :root {
-    --bg-color: #000;
-    --card-bg: rgba(12, 12, 12, 0.85);
+    /* Base Colors - Digital Youth */
+    --bg-color: #1a1a1a;
+    --card-bg: rgba(26, 26, 26, 0.6);
+    --card-bg-solid: #1a1a1a;
     --card-border: rgba(255, 255, 255, 0.1);
-    --card-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-    --accent-color: #fff;
+
+    /* Accents */
+    --accent-neon-lime: #ccff00;
+    --accent-vivid-purple: #8a2be2;
+    --accent-bright-coral: #ff6f61;
+    --accent-deep-charcoal: #1a1a1a;
+
+    --accent-gradient: linear-gradient(135deg, var(--accent-neon-lime), var(--accent-vivid-purple));
+    --accent-gradient-warm: linear-gradient(135deg, var(--accent-vivid-purple), var(--accent-bright-coral));
+    --flare-gradient: linear-gradient(90deg, #00d4ff, #ff00ff, #ff6f61);
+
+    /* Glow Effects */
+    --glow-lime: 0 0 20px rgba(204, 255, 0, 0.4);
+    --glow-purple: 0 0 20px rgba(138, 43, 226, 0.4);
+    --glow-mixed: 0 0 30px rgba(204, 255, 0, 0.2), 0 0 60px rgba(138, 43, 226, 0.2);
+
+    /* Text Colors */
     --text-primary: #ffffff;
-    --text-secondary: #888;
-    --text-muted: #ccc;
-    --github-green: #2da44e;
-    --font-main: 'Outfit', sans-serif;
-    --transition-smooth: all 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    --text-secondary: #e0e0e0;
+    --text-muted: #a0a0a0;
+
+    /* Typography */
+    --font-heading: 'Archivo Black', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+    --font-body: 'Outfit', sans-serif;
+
+    /* Transitions */
+    --transition-smooth: all 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+    --transition-bounce: all 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    cursor: none;
+    /* Hide default cursor for custom spotlight */
 }
 
 body {
-    font-family: var(--font-main);
+    font-family: var(--font-body);
     color: var(--text-primary);
-    height: 100vh;
-    overflow: hidden;
-    /* Prevent scrolling */
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    min-height: 100vh;
+    overflow-x: hidden;
     background-color: var(--bg-color);
+    line-height: 1.6;
+}
+
+/* Global Effects */
+.noise-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 9998;
+    background: url('data:image/svg+xml;utf8,%3Csvg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg"%3E%3Cfilter id="noiseFilter"%3E%3CfeTurbulence type="fractalNoise" baseFrequency="0.65" numOctaves="3" stitchTiles="stitch"/%3E%3C/filter%3E%3Crect width="100%25" height="100%25" filter="url(%23noiseFilter)" opacity="0.07"/%3E%3C/svg%3E');
+    mix-blend-mode: overlay;
+    opacity: 0.5;
+}
+
+.cursor-spotlight {
+    position: fixed;
+    width: 400px;
+    height: 400px;
+    background: radial-gradient(circle, rgba(204, 255, 0, 0.15) 0%, rgba(138, 43, 226, 0.05) 40%, transparent 70%);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 9999;
+    mix-blend-mode: screen;
+    transition: width 0.3s, height 0.3s;
+}
+
+.cursor-dot {
+    position: fixed;
+    width: 8px;
+    height: 8px;
+    background: var(--accent-neon-lime);
+    border-radius: 50%;
+    pointer-events: none;
+    transform: translate(-50%, -50%);
+    z-index: 10000;
+    box-shadow: 0 0 10px var(--accent-neon-lime);
+}
+
+/* Utility Classes */
+.gradient-text {
+    background: var(--accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* Keyframe Animations */
+@keyframes pulse-glow {
+
+    0%,
+    100% {
+        filter: drop-shadow(0 0 8px rgba(0, 212, 255, 0.5));
+    }
+
+    50% {
+        filter: drop-shadow(0 0 20px rgba(168, 85, 247, 0.6));
+    }
+}
+
+@keyframes border-dance {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes float {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-6px);
+    }
+}
+
+@keyframes shimmer {
+    0% {
+        background-position: -200% center;
+    }
+
+    100% {
+        background-position: 200% center;
+    }
 }
