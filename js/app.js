@@ -174,8 +174,27 @@ function createVisualizer() {
     }
 }
 
+/**
+ * Randomizes the handwritten font family
+ */
+function randomizeFont() {
+    const textElement = document.querySelector('.handwritten-path');
+    if (!textElement) return;
+
+    const fonts = [
+        "'Dancing Script', cursive",
+        "'Great Vibes', cursive",
+        "'Sacramento', cursive"
+    ];
+
+    const randomFont = getRandomItem(fonts);
+    textElement.style.fontFamily = randomFont;
+    console.log(`Applied font: ${randomFont}`);
+}
+
 // Initialize on DOM load
 window.addEventListener('DOMContentLoaded', () => {
     initBackground();
     createVisualizer();
+    randomizeFont();
 });

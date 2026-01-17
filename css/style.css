@@ -87,3 +87,50 @@ body {
 body::-webkit-scrollbar {
     display: none;
 }
+
+/* Handwritten Text Animation */
+.handwritten-svg {
+    width: 280px;
+    height: 80px;
+    overflow: visible;
+}
+
+.handwritten-path {
+    fill: transparent;
+    stroke: url(#textGradient);
+    /* Links to ID in HTML */
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 400;
+    /* Approximate max dash */
+    stroke-dashoffset: 400;
+    animation: writeText 4s ease-in-out forwards, fillText 2s ease-in-out 3s forwards;
+}
+
+/* Specific delays for sequential writing feeling if multiple paths */
+.handwritten-path:nth-child(1) {
+    animation-delay: 0s, 1.5s;
+}
+
+.handwritten-path:nth-child(2) {
+    animation-delay: 0.3s, 1.5s;
+}
+
+/* ... add more if paths are split, but for simplicity assuming joined or few paths */
+
+@keyframes writeText {
+    to {
+        stroke-dashoffset: 0;
+    }
+}
+
+@keyframes fillText {
+    to {
+        fill: url(#textGradient);
+        fill-opacity: 1;
+        /* Ensure opacity is handled */
+        stroke-width: 0;
+        /* Optional: remove stroke to just show fill */
+    }
+}
