@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Silent Flare | Digital Experience</title>
+
+    <!-- Fonts: Inter & Space Grotesk -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Grotesk:wght@500;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Space Grotesk', 'sans-serif'],
+                    },
+                    colors: {
+                        dark: '#050505',
+                        'flare-start': '#F59E0B', // Amber
+                        'flare-end': '#E11D48',   // Rose
+                        'flare-accent': '#8B5CF6', // Violet
+                    },
+                    animation: {
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        /* Modern Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #050505;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #333;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #444;
+        }
+
+        /* Glassmorphism Utilities */
+        .glass {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .glass-nav {
+            background: rgba(5, 5, 5, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        /* Ambient Glow/Flare effects */
+        .flare-glow {
+            position: absolute;
+            filter: blur(80px);
+            opacity: 0.4;
+            z-index: -1;
+            border-radius: 50%;
+        }
+
+        /* Utility for fade-in animation */
+        .opacity-0-trans {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+
+        .opacity-100-trans {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body
+    class="bg-dark text-slate-300 font-sans antialiased overflow-x-hidden selection:bg-rose-500/30 selection:text-white">
+
+    <!-- Background Ambience -->
+    <div class="fixed inset-0 pointer-events-none overflow-hidden">
+        <div class="flare-glow w-[500px] h-[500px] bg-purple-900/30 top-[-100px] left-[-100px] animate-pulse-slow">
+        </div>
+        <div class="flare-glow w-[600px] h-[600px] bg-rose-900/20 bottom-[-200px] right-[-100px] animate-pulse-slow"
+            style="animation-delay: 2s;"></div>
+    </div>
+
+    <!-- Navigation -->
+    <nav id="navbar" class="fixed w-full z-50 glass-nav transition-all duration-300 transform translate-y-0">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex items-center justify-between h-20">
+                <!-- Logo -->
+                <a href="#"
+                    class="font-display font-bold text-xl tracking-wider text-white hover:opacity-80 transition">
+                    SILENT FLARE
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#about" class="text-sm font-medium hover:text-white transition-colors">About</a>
+                        <a href="#works" class="text-sm font-medium hover:text-white transition-colors">Works</a>
+                        <a href="#contact"
+                            class="px-4 py-2 text-sm font-medium text-white border border-white/10 rounded-full hover:bg-white/5 transition-all hover:border-white/30">Get
+                            in Touch</a>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="-mr-2 flex md:hidden">
+                    <button type="button"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white focus:outline-none"
+                        aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16M4 18h16" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="relative h-screen flex items-center justify-center px-6 overflow-hidden">
+
+        <!-- Central Flare Halo -->
+        <div
+            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-to-tr from-amber-500/10 via-rose-500/10 to-purple-500/10 rounded-full blur-3xl animate-pulse-slow">
+        </div>
+
+        <div class="relative z-10 text-center max-w-4xl mx-auto">
+            <h1
+                class="font-display text-5xl md:text-8xl font-bold tracking-tight text-white mb-6 leading-tight fade-in">
+                Silent
+                <span
+                    class="text-transparent bg-clip-text bg-gradient-to-r from-amber-400 via-rose-500 to-purple-600 animate-gradient-x">
+                    Flare
+                </span>
+            </h1>
+            <p
+                class="mt-4 text-lg md:text-xl text-slate-400 max-w-2xl mx-auto font-light leading-relaxed fade-in delay-100">
+                Crafting digital experiences that glow in the void. Minimalist design meets high-octane performance.
+            </p>
+
+            <div class="mt-10 flex flex-col md:flex-row gap-4 justify-center items-center fade-in delay-200">
+                <a href="#works"
+                    class="group relative px-8 py-3 bg-white text-dark font-semibold rounded-full overflow-hidden transition-transform hover:scale-105">
+                    <div
+                        class="absolute inset-0 bg-gradient-to-r from-amber-200 to-rose-300 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    </div>
+                    <span class="relative z-10">Explore Works</span>
+                </a>
+                <a href="#about"
+                    class="px-8 py-3 text-white border border-white/20 rounded-full hover:bg-white/5 transition-colors">
+                    Who am I?
+                </a>
+            </div>
+        </div>
+
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce opacity-50">
+            <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 14l-7 7m0 0l-7-7m7 7V3">
+                </path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-24 md:py-32 relative">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-16 items-center">
+                <!-- Image/Visual -->
+                <div class="relative group fade-in-scroll">
+                    <div
+                        class="absolute -inset-1 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-2xl blur opacity-25 group-hover:opacity-75 transition duration-1000 group-hover:duration-200">
+                    </div>
+                    <div
+                        class="relative rounded-2xl overflow-hidden glass aspect-w-4 aspect-h-5 h-[400px] w-full flex items-center justify-center bg-gray-900">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80"
+                            alt="Profile Placeholder"
+                            class="object-cover w-full h-full opacity-80 group-hover:opacity-100 transition-opacity duration-500 mix-blend-luminosity hover:mix-blend-normal">
+                    </div>
+                </div>
+
+                <!-- Text Content -->
+                <div class="fade-in-scroll">
+                    <h2 class="font-display text-3xl md:text-5xl font-bold text-white mb-6">Designing from the <span
+                            class="text-purple-400">shadows</span>.</h2>
+                    <p class="text-slate-400 mb-6 text-lg leading-relaxed">
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut
+                        labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
+                        laboris nisi ut aliquip ex ea commodo consequat.
+                    </p>
+                    <p class="text-slate-400 mb-8 text-lg leading-relaxed">
+                        Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
+                        pariatur. Excepteur sint occaecat cupidatat non proident.
+                    </p>
+
+                    <!-- Stats/Skills -->
+                    <div class="grid grid-cols-2 gap-8 border-t border-white/10 pt-8">
+                        <div>
+                            <span class="block text-3xl font-display font-bold text-white mb-1">3+</span>
+                            <span class="text-sm text-slate-500 uppercase tracking-widest">Years Exp</span>
+                        </div>
+                        <div>
+                            <span class="block text-3xl font-display font-bold text-white mb-1">50+</span>
+                            <span class="text-sm text-slate-500 uppercase tracking-widest">Projects</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Works Section -->
+    <section id="works" class="py-24 md:py-32 relative bg-black/20">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in-scroll">
+                <h2 class="font-display text-3xl md:text-5xl font-bold text-white mb-4">Selected Works</h2>
+                <p class="text-slate-400 max-w-2xl mx-auto">A glimpse into the digital void. Projects that define my
+                    style.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div
+                    class="group relative rounded-xl overflow-hidden glass hover:border-white/20 transition-all duration-300 transform hover:-translate-y-2 fade-in-scroll">
+                    <div class="h-48 overflow-hidden bg-gray-800 relative">
+                        <!-- Overlay gradient on hover -->
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10 lg:opacity-60 lg:group-hover:opacity-40 transition-opacity">
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
+                            alt="Project 1"
+                            class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-6 relative z-20">
+                        <div class="text-xs text-amber-500 font-bold tracking-widest uppercase mb-2">Development</div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-amber-400 transition-colors">Neon
+                            Dashboard</h3>
+                        <p class="text-slate-400 text-sm mb-4">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                            Minimalist analytics platform.</p>
+                        <a href="#"
+                            class="inline-flex items-center text-sm font-medium text-white hover:underline decoration-amber-500 underline-offset-4">
+                            View Project
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                    <!-- Hover Glow -->
+                    <div
+                        class="absolute -bottom-4 -right-4 w-24 h-24 bg-amber-500/20 rounded-full blur-2xl group-hover:bg-amber-500/40 transition-colors">
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="group relative rounded-xl overflow-hidden glass hover:border-white/20 transition-all duration-300 transform hover:-translate-y-2 fade-in-scroll"
+                    style="transition-delay: 100ms;">
+                    <div class="h-48 overflow-hidden bg-gray-800 relative">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10 lg:opacity-60 lg:group-hover:opacity-40 transition-opacity">
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?ixlib=rb-4.0.3&auto=format&fit=crop&w=1064&q=80"
+                            alt="Project 2"
+                            class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-6 relative z-20">
+                        <div class="text-xs text-rose-500 font-bold tracking-widest uppercase mb-2">UI/UX Design</div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-rose-400 transition-colors">
+                            Ethereal Commerce</h3>
+                        <p class="text-slate-400 text-sm mb-4">Sed do eiusmod tempor incididunt ut labore. A smooth
+                            shopping experience.</p>
+                        <a href="#"
+                            class="inline-flex items-center text-sm font-medium text-white hover:underline decoration-rose-500 underline-offset-4">
+                            View Project
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                    <!-- Hover Glow -->
+                    <div
+                        class="absolute -bottom-4 -right-4 w-24 h-24 bg-rose-500/20 rounded-full blur-2xl group-hover:bg-rose-500/40 transition-colors">
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="group relative rounded-xl overflow-hidden glass hover:border-white/20 transition-all duration-300 transform hover:-translate-y-2 fade-in-scroll"
+                    style="transition-delay: 200ms;">
+                    <div class="h-48 overflow-hidden bg-gray-800 relative">
+                        <div
+                            class="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent z-10 lg:opacity-60 lg:group-hover:opacity-40 transition-opacity">
+                        </div>
+                        <img src="https://images.unsplash.com/photo-1550751827-4bd374c3f58b?ixlib=rb-4.0.3&auto=format&fit=crop&w=1170&q=80"
+                            alt="Project 3"
+                            class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700">
+                    </div>
+                    <div class="p-6 relative z-20">
+                        <div class="text-xs text-purple-500 font-bold tracking-widest uppercase mb-2">Branding</div>
+                        <h3 class="text-xl font-bold text-white mb-2 group-hover:text-purple-400 transition-colors">
+                            Nebula Identity</h3>
+                        <p class="text-slate-400 text-sm mb-4">Ut enim ad minim veniam, quis nostrud. Creating a cosmic
+                            brand system.</p>
+                        <a href="#"
+                            class="inline-flex items-center text-sm font-medium text-white hover:underline decoration-purple-500 underline-offset-4">
+                            View Project
+                            <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+                            </svg>
+                        </a>
+                    </div>
+                    <!-- Hover Glow -->
+                    <div
+                        class="absolute -bottom-4 -right-4 w-24 h-24 bg-purple-500/20 rounded-full blur-2xl group-hover:bg-purple-500/40 transition-colors">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="border-t border-white/5 bg-[#030303] pt-16 pb-8">
+        <div class="max-w-7xl mx-auto px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center mb-8">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-2xl font-display font-bold text-white">Silent Flare</h2>
+                    <p class="text-slate-500 text-sm mt-2">Designed for the shadows.</p>
+                </div>
+
+                <div class="flex space-x-6">
+                    <!-- Social Icons (Placeholders) -->
+                    <a href="#" class="text-slate-400 hover:text-white transition-colors">
+                        <span class="sr-only">Twitter</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path
+                                d="M8.29 20.251c7.547 0 11.675-6.253 11.675-11.675 0-.178 0-.355-.012-.53A8.348 8.348 0 0022 5.92a8.19 8.19 0 01-2.357.646 4.118 4.118 0 001.804-2.27 8.224 8.224 0 01-2.605.996 4.107 4.107 0 00-6.993 3.743 11.65 11.65 0 01-8.457-4.287 4.106 4.106 0 001.27 5.477A4.072 4.072 0 012.8 9.713v.052a4.105 4.105 0 003.292 4.022 4.095 4.095 0 01-1.853.07 4.108 4.108 0 003.834 2.85A8.233 8.233 0 012 18.407a11.616 11.616 0 006.29 1.84" />
+                        </svg>
+                    </a>
+                    <a href="#" class="text-slate-400 hover:text-white transition-colors">
+                        <span class="sr-only">GitHub</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd"
+                                d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                    <a href="#" class="text-slate-400 hover:text-white transition-colors">
+                        <span class="sr-only">LinkedIn</span>
+                        <svg class="h-6 w-6" fill="currentColor" viewBox="0 0 24 24">
+                            <path fill-rule="evenodd"
+                                d="M19 0h-14c-2.761 0-5 2.239-5 5v14c0 2.761 2.239 5 5 5h14c2.762 0 5-2.239 5-5v-14c0-2.761-2.238-5-5-5zm-11 19h-3v-11h3v11zm-1.5-12.268c-.966 0-1.75-.79-1.75-1.764s.784-1.764 1.75-1.764 1.75.79 1.75 1.764-.783 1.764-1.75 1.764zm13.5 12.268h-3v-5.604c0-3.368-4-3.113-4 0v5.604h-3v-11h3v1.765c1.396-2.586 7-2.777 7 2.476v6.759z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div
+                class="border-t border-white/5 pt-8 flex flex-col md:flex-row justify-between items-center text-sm text-slate-600">
+                <p>&copy; 202X Silent Flare. All rights reserved.</p>
+                <div class="flex space-x-6 mt-4 md:mt-0">
+                    <a href="#" class="hover:text-slate-400 text-slate-600">Privacy Policy</a>
+                    <a href="#" class="hover:text-slate-400 text-slate-600">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript for Animations -->
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Intersection Observer for Fade-in visuals
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.1
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('opacity-100-trans');
+                        entry.target.classList.remove('opacity-0-trans');
+                        observer.unobserve(entry.target); // Only animate once
+                    }
+                });
+            }, observerOptions);
+
+            const fadeElements = document.querySelectorAll('.fade-in, .fade-in-scroll');
+
+            fadeElements.forEach(el => {
+                el.classList.add('opacity-0-trans'); // Set initial state
+                observer.observe(el);
+            });
+
+            // Navbar Scroll Effect
+            const navbar = document.getElementById('navbar');
+
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('shadow-lg');
+                    navbar.classList.replace('bg-opacity-0', 'bg-opacity-80'); // Adjust as needed based on CSS
+                } else {
+                    navbar.classList.remove('shadow-lg');
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
