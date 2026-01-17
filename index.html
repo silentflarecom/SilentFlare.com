@@ -120,10 +120,10 @@
 
             <!-- Bottom Section: Contribution Graph -->
             <div class="w-full border-t border-white/60 pt-6">
-                <div class="bg-white/40 rounded-xl p-4 flex justify-center items-center overflow-hidden">
-                    <img src="https://ghchart.rshah.org/38bdf8/silentflarecom" alt="GitHub Contributions"
-                        class="contrib-graph max-w-full h-auto" style="min-height: 80px;"
-                        onerror="this.style.display='none';">
+                <div
+                    class="bg-white/40 rounded-xl p-4 flex justify-center items-center overflow-hidden w-full overflow-x-auto">
+                    <!-- Dynamic Grid Container -->
+                    <div id="contrib-grid" class="flex gap-1"></div>
                 </div>
             </div>
 
