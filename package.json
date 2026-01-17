@@ -1,0 +1,26 @@
+{
+  "name": "silentflare.com",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build:css": "tailwindcss -i ./css/input.css -o ./css/output.css",
+    "watch:css": "tailwindcss -i ./css/input.css -o ./css/output.css --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/silentflarecom/SilentFlare.com.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/silentflarecom/SilentFlare.com/issues"
+  },
+  "homepage": "https://github.com/silentflarecom/SilentFlare.com#readme",
+  "devDependencies": {
+    "tailwindcss": "^3.4.19"
+  }
+}

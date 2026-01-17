@@ -1,0 +1,12 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS from style.css can be moved here or kept separate. 
+   For now, I'll keep style.css separate and just use this for Tailwind. 
+   Note: If style.css relies on @apply, it should be moved here. 
+   Given style.css has standard CSS, it's fine to keep it separate or import it.
+   But typically we want one css file. 
+   However, style.css has 'glass-panel' and animations. 
+   I will leave style.css as is and just add the tailwind directives here.
+*/
