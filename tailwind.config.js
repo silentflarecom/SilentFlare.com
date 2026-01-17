@@ -5,6 +5,10 @@ module.exports = {
             colors: {
                 'brand-sky': '#38bdf8',
                 'brand-cyan': '#22d3ee',
+                'silent-base': '#0a0a0a',
+                'silent-dark': '#171717',
+                'neon-cyan': '#06b6d4',
+                'neon-purple': '#8b5cf6',
             },
             fontFamily: {
                 sans: ['Inter', 'sans-serif'],

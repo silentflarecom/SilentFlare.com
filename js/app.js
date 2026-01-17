@@ -305,11 +305,54 @@ function generateMockGrid(container) {
     }
 }
 
+/**
+ * Initialize Mouse Interactions (Spotlight & Parallax)
+ */
+function initInteractions() {
+    const glassPanel = document.querySelector('.glass-panel');
+    const mediaContainer = document.getElementById('media-container');
+
+    document.addEventListener('mousemove', (e) => {
+        const x = e.clientX;
+        const y = e.clientY;
+
+        // 1. Spotlight Effect (Update CSS Variables)
+        // We set these on the glass panel so the radial gradient knows where to center
+        if (glassPanel) {
+            const rect = glassPanel.getBoundingClientRect();
+            const localX = x - rect.left;
+            const localY = y - rect.top;
+            glassPanel.style.setProperty('--mouse-x', `${localX}px`);
+            glassPanel.style.setProperty('--mouse-y', `${localY}px`);
+
+            // 2. Parallax Effect logic
+            // Calculate distance from center (normalized -1 to 1)
+            const centerX = window.innerWidth / 2;
+            const centerY = window.innerHeight / 2;
+
+            const moveX = (x - centerX) / centerX;
+            const moveY = (y - centerY) / centerY;
+
+            // Move the panel slightly (opposite to mouse)
+            // Limit the movement to small amount (e.g. 10px)
+            const panelMove = 10;
+            glassPanel.style.transform = `translate(${-moveX * panelMove}px, ${-moveY * panelMove}px)`;
+        }
+
+        // Move background slightly (same direction as mouse for depth)
+        if (mediaContainer) {
+            const bgMove = 15;
+            mediaContainer.style.transform = `scale(1.05) translate(${moveX * bgMove}px, ${moveY * bgMove}px)`;
+        }
+    });
+}
+
 // Initialize on DOM load
 window.addEventListener('DOMContentLoaded', () => {
     initBackground();
     createVisualizer();
     randomizeFont();
     renderContributionGrid();
+    initInteractions();
 });
 
