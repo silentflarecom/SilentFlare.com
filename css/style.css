@@ -1,0 +1,89 @@
+/* Custom Styles for Effects that are complex in Tailwind */
+
+.glass-panel {
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    box-shadow: 0 20px 50px -12px rgba(0, 0, 0, 0.1);
+}
+
+/* Avatar Container */
+.avatar-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Visualizer Bars */
+.visualizer-ring {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 140%;
+    /* Slightly larger than avatar */
+    height: 140%;
+    /* Slightly larger than avatar */
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.bar {
+    position: absolute;
+    bottom: 50%;
+    /* Anchor to center */
+    left: 50%;
+    width: 4px;
+    /* Width of each bar */
+    height: 20px;
+    /* Base height */
+    background: linear-gradient(to top, #38bdf8, #22d3ee);
+    /* Sky to Cyan */
+    transform-origin: bottom center;
+    border-radius: 2px;
+    opacity: 0.8;
+    /* Animation defined inline in JS for randomness, or we can use a standard one here and override */
+}
+
+@keyframes jump {
+    0% {
+        height: 10px;
+        opacity: 0.5;
+    }
+
+    50% {
+        height: 40px;
+        opacity: 1;
+    }
+
+    100% {
+        height: 10px;
+        opacity: 0.5;
+    }
+}
+
+.contrib-graph {
+    filter: grayscale(100%) opacity(0.8);
+    transition: all 0.5s ease;
+    mix-blend-mode: multiply;
+    /* Helps blend with glass */
+}
+
+.contrib-graph:hover {
+    filter: grayscale(0%) opacity(1);
+    mix-blend-mode: normal;
+}
+
+/* Hide scrollbars for cleaner look */
+body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+body::-webkit-scrollbar {
+    display: none;
+}
