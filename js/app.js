@@ -4,24 +4,48 @@
  * Background Media Configuration:
  * - Place your video files in the /vid folder
  * - Place your image files in the /pic folder
- * - Update the arrays below with your file names
+ * - Set your GitHub username and repo name below
  */
 
-const MEDIA_CONFIG = {
-    // List of video filenames in the /vid folder
-    videos: [
-        'singularity-station-moewalls-com.mp4',
-        // Add more videos here...
-    ],
+const GITHUB_CONFIG = {
+    // Your GitHub username
+    username: 'silentflarecom',
+    // Your repository name (usually same as username.github.io or custom domain)
+    repo: 'SilentFlare.com',
+    // Branch name
+    branch: 'main',
+};
 
-    // List of image filenames in the /pic folder
-    pictures: [
-        'wallhaven-9oo8k1.jpg',
-        // Add more images here...
-    ],
+// Cache for media files (to avoid repeated API calls)
+let mediaCache = {
+    videos: null,
+    pictures: null,
 };
 
 const mediaContainer = document.getElementById('media-container');
+
+/**
+ * Fetch file list from GitHub API
+ */
+async function fetchGitHubFiles(folder) {
+    const url = `https://api.github.com/repos/${GITHUB_CONFIG.username}/${GITHUB_CONFIG.repo}/contents/${folder}?ref=${GITHUB_CONFIG.branch}`;
+
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            console.warn(`Failed to fetch ${folder} from GitHub API`);
+            return [];
+        }
+        const files = await response.json();
+        // Filter only files (not directories) and return names
+        return files
+            .filter(item => item.type === 'file')
+            .map(item => item.name);
+    } catch (error) {
+        console.warn(`Error fetching ${folder}:`, error);
+        return [];
+    }
+}
 
 /**
  * Randomly selects an item from an array
@@ -33,14 +57,25 @@ function getRandomItem(arr) {
 /**
  * Initializes the background with a random image or video
  */
-function initBackground() {
+async function initBackground() {
     if (!mediaContainer) return;
     mediaContainer.innerHTML = '';
 
-    const hasVideos = MEDIA_CONFIG.videos.length > 0;
-    const hasPictures = MEDIA_CONFIG.pictures.length > 0;
+    // Fetch media lists from GitHub (or use cache)
+    if (!mediaCache.videos) {
+        mediaCache.videos = await fetchGitHubFiles('vid');
+    }
+    if (!mediaCache.pictures) {
+        mediaCache.pictures = await fetchGitHubFiles('pic');
+    }
 
-    // If both are available, randomly pick; otherwise use whichever exists
+    const videos = mediaCache.videos;
+    const pictures = mediaCache.pictures;
+
+    const hasVideos = videos.length > 0;
+    const hasPictures = pictures.length > 0;
+
+    // Determine what to show
     let showVideo = false;
     if (hasVideos && hasPictures) {
         showVideo = Math.random() > 0.5;
@@ -49,16 +84,15 @@ function initBackground() {
     } else if (hasPictures) {
         showVideo = false;
     } else {
-        // No media available, show a solid background
-        console.warn('No media files configured.');
+        console.warn('No media files found in vid/ or pic/ folders.');
         return;
     }
 
     if (showVideo) {
-        const videoFile = getRandomItem(MEDIA_CONFIG.videos);
+        const videoFile = getRandomItem(videos);
         createVideoElement(`vid/${videoFile}`);
     } else {
-        const imageFile = getRandomItem(MEDIA_CONFIG.pictures);
+        const imageFile = getRandomItem(pictures);
         createImageElement(`pic/${imageFile}`);
     }
 }
@@ -81,9 +115,9 @@ function createVideoElement(src) {
     // Handle error: fallback to image if available
     video.onerror = () => {
         console.warn(`Video failed to load: ${src}`);
-        if (MEDIA_CONFIG.pictures.length > 0) {
+        if (mediaCache.pictures && mediaCache.pictures.length > 0) {
             mediaContainer.innerHTML = '';
-            const imageFile = getRandomItem(MEDIA_CONFIG.pictures);
+            const imageFile = getRandomItem(mediaCache.pictures);
             createImageElement(`pic/${imageFile}`);
         }
     };
