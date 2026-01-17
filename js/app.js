@@ -143,36 +143,8 @@ function createImageElement(src) {
 }
 
 /**
- * Generate Visualizer Bars around the avatar
+ * Randomizes the handwritten font family
  */
-function createVisualizer() {
-    const container = document.getElementById('visualizer');
-    if (!container) return;
-
-    // Clear existing bars
-    container.innerHTML = '';
-
-    const totalBars = 36; // Number of bars
-
-    for (let i = 0; i < totalBars; i++) {
-        const bar = document.createElement('div');
-        bar.classList.add('bar');
-
-        // Calculate angle for radial positioning
-        const angle = (360 / totalBars) * i;
-
-        // Randomize animation for irregular look
-        const duration = 0.5 + Math.random() * 0.8; // 0.5s - 1.3s
-        const delay = Math.random() * 1; // 0 - 1s delay
-
-        // Position and animate
-        bar.style.transform = `rotate(${angle}deg) translateY(-65px)`;
-        bar.style.animation = `jump ${duration}s ease-in-out infinite alternate`;
-        bar.style.animationDelay = `-${delay}s`;
-
-        container.appendChild(bar);
-    }
-}
 
 /**
  * Randomizes the handwritten font family
@@ -350,7 +322,6 @@ function initInteractions() {
 // Initialize on DOM load
 window.addEventListener('DOMContentLoaded', () => {
     initBackground();
-    createVisualizer();
     randomizeFont();
     renderContributionGrid();
     initInteractions();
