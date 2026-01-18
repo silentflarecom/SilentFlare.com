@@ -256,3 +256,31 @@ body {
         /* Optional: remove stroke to just show fill */
     }
 }
+
+/* -------------------------------------------------------------------------- */
+/* NEW: Reliable Typing Cursor */
+/* -------------------------------------------------------------------------- */
+.typing-cursor::after {
+    content: '';
+    display: inline-block;
+    width: 2px;
+    height: 1em;
+    background-color: #06b6d4;
+    /* Neon Cyan */
+    margin-left: 2px;
+    vertical-align: middle;
+    /* Aligns with text middle */
+    animation: blink-cursor 1s step-end infinite;
+}
+
+@keyframes blink-cursor {
+
+    0%,
+    100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}

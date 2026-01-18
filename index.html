@@ -61,7 +61,7 @@
     <!-- Main Card Container -->
     <main class="relative z-20 w-full max-w-4xl animate-float">
 
-        <div class="glass-panel w-full rounded-3xl p-8 md:p-12 flex flex-col gap-8 transition-transform duration-300">
+        <div class="glass-panel w-full rounded-3xl p-8 md:p-12 flex flex-col gap-8">
 
             <!-- Top Section: Avatar + Info -->
             <div class="flex flex-col md:flex-row items-center md:items-start gap-12 md:gap-14">
@@ -99,9 +99,10 @@
                                 </text>
                             </svg>
                         </div>
-                        <p class="text-neon-cyan/80 font-medium tracking-widest uppercase text-sm">Frontend Developer &
-                            UI
-                            Designer</p>
+                        <div class="h-8 flex items-center">
+                            <span id="typing-text"
+                                class="text-neon-cyan/80 font-medium tracking-widest uppercase text-sm typing-cursor"></span>
+                        </div>
                     </div>
 
                     <!-- Description -->
@@ -115,17 +116,17 @@
 
                         <div class="flex items-center gap-5 text-2xl text-slate-500">
                             <a href="https://github.com/silentflarecom" target="_blank"
-                                class="hover:text-white hover:scale-110 transition-all duration-200" title="GitHub"
+                                class="magnetic-btn hover:text-white transition-colors duration-200" title="GitHub"
                                 aria-label="GitHub Profile">
                                 <i class="fab fa-github"></i>
                             </a>
                             <a href="https://x.com/SilentFlareCOM" target="_blank"
-                                class="hover:text-neon-cyan hover:scale-110 transition-all duration-200"
+                                class="magnetic-btn hover:text-neon-cyan transition-colors duration-200"
                                 title="Twitter / X" aria-label="Twitter Profile">
                                 <i class="fab fa-twitter"></i>
                             </a>
                             <a href="mailto:contact@silentflare.com"
-                                class="hover:text-neon-purple hover:scale-110 transition-all duration-200" title="Email"
+                                class="magnetic-btn hover:text-neon-purple transition-colors duration-200" title="Email"
                                 aria-label="Send Email">
                                 <i class="fas fa-envelope"></i>
                             </a>
